@@ -6,7 +6,9 @@ const Table = () => {
         <div className="mb-3"><label htmlFor="" className="form-label"></label>
             <select name="" id="" className="form-select">
                 <option selected value="all">All categories</option>
-                <option selected value="groceries">Groceries</option>
+                <option value="groceries">Groceries</option>
+                <option value="utilities">Utilities</option>
+                <option value="entertainment">Entertainment</option>
             </select>
         </div>
         <table className="table table-bordered">
