@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { z } from 'zod'
 
-const Table = () => {
+
+const schema = z.object({
+    description: z.string(),
+    amount: z.number(),
+    category: z.string()
+})
+
+type FormData = z.infer<typeof schema>
+
+interface TableProp {
+    expense: FormData[],
+    setExpense: (value: any)=> void
+}
+
+const Table = ({expense, setExpense}: TableProp) => {
+
+    const sum = expense.reduce((acc, item) => 
+
+        acc + item.amount
+
+    , 0)
   return (
     <div>
         <div className="mb-3"><label htmlFor="" className="form-label"></label>
@@ -11,7 +32,7 @@ const Table = () => {
                 <option value="entertainment">Entertainment</option>
             </select>
         </div>
-        <table className="table table-bordered">
+        {expense.length > 0 && <table className="table table-bordered">
             <thead>
                 <tr>
                     <th scope='col'>Description</th>
@@ -21,11 +42,22 @@ const Table = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
+            {expense.map(item => (
+                <tr>  
+                    <td>{item.description}</td>
+                    <td>${item.amount}</td>
+                    <td>{item.category}</td>
+                    <td><button className='btn btn-outline-danger'>Delete</button></td>
                 </tr>
+                ))}
             </tbody>
-        </table>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>${sum}</td>
+                </tr>
+            </tfoot>
+        </table>}
     </div>
   )
 }

@@ -5,11 +5,12 @@ import Table from './components/Table'
 
 function App() {
   
+  const [expense, setExpense] = useState([])
 
   return (
     <div>
-      <Form/>
-      <Table/>
+      <Form expense={expense} setExpense={setExpense}/>
+      <Table expense={expense} setExpense={setExpense}/>
     </div>
   )
 }
